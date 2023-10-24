@@ -1,7 +1,7 @@
 # api
 Beispiele zur API Nutzung öffentlicher Datenbanken
 
-## German Census Database - Table of content
+## German Census Database - Table of contents
 Use `catalogue` and `metadata` services from the Genesis API to build a table of content of the public database.
 https://github.com/wahlatlas/api/blob/main/census_database_toc.ipynb  
 Since this may run for about 90 minutes, the resulting Excel files in German/English are provided here as well.
