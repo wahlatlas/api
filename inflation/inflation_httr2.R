@@ -1,5 +1,5 @@
 library(httr2)
-#library(jsonlite)
+library(jsonlite)
 
 
 # Zugangsdaten ausprobieren
@@ -11,6 +11,7 @@ response <- httr2::request("https://www-genesis.destatis.de/genesisWS/rest/2020"
     httr2::resp_body_json()
 
 response
+
 
 
 # Tabelle 61111-0001 als ffcsv ab 1998 in deutscher Sprache abrufen
@@ -25,3 +26,19 @@ response <- httr2::request("https://www-genesis.destatis.de/genesisWS/rest/2020"
   httr2::req_perform()
 
 response |> resp_raw()
+
+
+
+# Verwendungszwecke des Individualkonsums, COICOP 10-Steller
+
+response <- httr2::request("https://www-genesis.destatis.de/genesisWS/rest/2020") %>%
+  httr2::req_url_path_append("catalogue/values2variable") %>%
+  httr2::req_url_query(username= "xxx", password="xxx", 
+                       name="CC13Z1", 
+                       pagelength=10, 
+                       language="de") %>% 
+  httr2::req_perform()
+
+response |> resp_raw()
+fromJSON(response |> resp_body_string())['List']
+
