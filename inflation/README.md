@@ -15,4 +15,6 @@ https://www-genesis.destatis.de/datenbank/beta#modal=register
 R  
 https://github.com/CorrelAid/restatis  
 Python  
-https://github.com/sjockers/genesis-api-example
+https://github.com/sjockers/genesis-api-example  
+  
+![Seasonality of monthly price data](https://github.com/wahlatlas/api/blob/main/inflation/price_index_plot.png?raw=true)
