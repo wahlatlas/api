@@ -1,6 +1,8 @@
 library(tidyverse)
+
 library(restatis)
 # https://correlaid.github.io/restatis/articles/restatis.html
+
 
 # Bekannte Tabelle abrufen
 inflation <- gen_table("61111-0001")
@@ -9,19 +11,13 @@ select(inflation, 5, 10:11)
 inflation <- gen_table("61111-0001", startyear=1998)
 select(inflation, 5, 10:11)
 
-#inflation <- gen_table("61111-0001", language="de")
-#select(inflation, 5, 10:11)
+#inflation_de <- gen_table("61111-0001", language="de")
+#select(inflation_de, 5, 10:11)
 # https://github.com/CorrelAid/restatis/issues/22
 
 ggplot(data=inflation, aes(x=time, y=PREIS1__CH0004)) +
   geom_col()
 
-# Beschreibung zur Tabelle
-gen_metadata(code = "61111-0001", category = "Table")
-
-# Aktualisierungen
-gen_modified_data(code = "61*",    date = "30.06.2023")
-gen_modified_data(type = "tables", date = "month_before")
 
 # Recherche
 gen_alternative_terms(term = "*preis*")
@@ -33,31 +29,67 @@ gen_find(
   category = "all"
 )
 
+
 # Verwendungszwecke des Individualkonsums
 gen_find(term = "COICOP", category = "variables")
 
 # Ausgewählte Ausprägungen des COICOP 10-Steller
 gen_val2var("CC13Z1", 
-            selection = "Kinder*", searchcriterion = "Inhalt", 
+            selection = "Damen*", searchcriterion = "Inhalt", 
             language = "de")
 
-PreisKinderschuhe = gen_table("61111-0006", 
+# Tabellen, die den COICOP-10-Steller enthalten
+gen_find(term = "CC13Z1", category = "tables")
+
+# Code: 61111-0006
+# Verbraucherpreisindex: Deutschland, Monate, 
+# Klassifikation der Verwendungszwecke des Individualkonsums 
+# (COICOP 2-/3-/4-/5-/10-Steller/Sonderpositionen)
+# https://www-genesis.destatis.de/datenbank/beta/table/61111-0006
+
+
+# Anwendungsbeispiel classifyingvariable & classifyingkey
+# Verbraucherpreisindex "Damenjacke oder Damenmantel" (CC13-0312210200) 
+
+iKonsum = gen_table("61111-0006", 
           startyear = 2020, 
           classifyingvariable1 = "CC13Z1",
-          classifyingkey1 = "CC13-0321310300",
+          classifyingkey1 = "CC13-0312210200",
           compress = TRUE,
           language = "en")
 
-select(PreisKinderschuhe, 5,13,17,18)
+title = iKonsum$'3_variable_code...17'[1]
 
-PreisKinderschuhe <- transform(PreisKinderschuhe, 
-                               date=interaction(time,
-                                                `2_variable_code...13`, 
-                                                sep="_"))
+select(iKonsum, 5,12,13,17,18)
 
-select(PreisKinderschuhe,date,PREIS1__Consumer_price_index__2020.100)
 
-ggplot(data=PreisKinderschuhe, aes(x=date , 
-                                   y=PREIS1__Consumer_price_index__2020.100, 
-                                   group=1)) +
-  geom_line()
+# Visualisierung von Saisonfiguren (Modeartikel, Sommerschlussverkauf)
+
+# Datum erzeugen:
+# aus 2020 MONAT01 wird 2020-01-01
+iKonsum <- transform(iKonsum, 
+                     dateObj=as.Date(paste(time,
+                                           substr(`2_variable_code...12`,6,7),
+                                           "01",
+                                           collapse = NULL, sep="-")))
+
+#select(iKonsum,dateObj,PREIS1__Consumer_price_index__2020.100)
+
+ggplot(data=iKonsum, aes(x=dateObj, 
+                         y=PREIS1__Consumer_price_index__2020.100, 
+                         group=1)) +
+  geom_line() +
+  ggtitle(title) +
+  scale_x_date(date_breaks = "3 months", 
+               date_minor_breaks = "1 month",
+               labels = scales::label_date_short()) +
+  xlab("") + 
+  ylab("Consumer Price Index (2020=100)")
+
+
+# Aktualisierungen
+gen_modified_data(code = "61111",    date = "30.06.2023")
+gen_modified_data(type = "tables", date = "month_before")
+
+# Beschreibung zur Tabelle
+gen_metadata(code = "61111-0006", category = "Table")
