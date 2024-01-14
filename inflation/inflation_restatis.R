@@ -79,6 +79,7 @@ iKonsum <- transform(iKonsum,
 ggplot(data=iKonsum, aes(x=dateObj, 
                          y=PREIS1__Consumer_price_index__2020.100, 
                          group=1)) +
+  geom_hline(yintercept=100, color = "#aaaaaa", linewidth=.4) +
   geom_line() +
   geom_line(linewidth=1.5) +
   ggtitle(title) +
@@ -119,6 +120,7 @@ PreiseBekleidung <- transform(PreiseBekleidung,
 ggplot(data=PreiseBekleidung, aes(x=dateObj, 
                          y=PREIS1__Consumer_price_index__2020.100, 
                          colour=`X3_variable_code...17`)) +
+  geom_hline(yintercept=100, color = "#aaaaaa", linewidth=.4) +
   geom_line() +
   scale_color_manual(values=c("chocolate1", "blue3", "cyan4")) +
   geom_line(linewidth=1) +
