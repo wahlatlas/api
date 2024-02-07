@@ -1,8 +1,13 @@
 # api
 Beispiele zur API Nutzung öffentlicher Datenbanken
 
+## German Census Database - Efficiently Download Data
+Latest info on API changes (responses are zip-compressed as of Feb 5th, 2024) and the structure of the flatfile-csv-format (ffcsv).  
+Contains tested and documented sample code using Pandas/Python  
+https://github.com/wahlatlas/api/blob/main/census_table_via_api.ipynb  
+
 ## German Census Database - Table of contents
-Use `catalogue` and `metadata` services from the Genesis API to build a table of content of the public database.
+Use `catalogue` and `metadata` services from the Genesis API to build a table of contents of the public database.
 https://github.com/wahlatlas/api/blob/main/census_database_toc.ipynb  
 Since this may run for about 90 minutes, the resulting Excel files in German/English are provided here as well.
 
