@@ -8,6 +8,10 @@ Research official statistics using the API of their public database.
 Then decide on a table, e.g. `43312-0002` and plot it using matplotlib for each neighbor  
 https://github.com/wahlatlas/api/blob/main/stromhandel-genesis.ipynb
 
+## German Census 2022 results for general election districts
+https://github.com/wahlatlas/api/blob/main/Zensus2022Wahlkreise2025.ipynb
+  
+  
 *not yet updated*  
 
 ## German Census Database - Efficiently Download Data
