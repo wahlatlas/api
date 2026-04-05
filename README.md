@@ -3,6 +3,9 @@ Beispiele zur API Nutzung öffentlicher Datenbanken
 
 *updated for the improved API and fileformats starting Nov 5th, 2024*  
 
+## Plot monthly inflation data for Germany using {restatis} for easy API access to the Genesis database
+Example Code (R, ggplot) for [facets of timeseries](https://github.com/wahlatlas/api/blob/main/inflation2026sonderpositionen.R) using the {[restatis](https://github.com/CorrelAid/restatis)} package
+
 ## Plot monthly timeseries for electricity trade between Germany and its neighbors
 Research official statistics using the API of their public database.
 Then decide on a table, e.g. `43312-0002` and plot it using matplotlib for each neighbor  
