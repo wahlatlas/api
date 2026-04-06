@@ -1,10 +1,7 @@
-# api
-Beispiele zur API Nutzung öffentlicher Datenbanken
-
-*updated for the improved API and fileformats starting Nov 5th, 2024*  
+# Latest additions
 
 ## Plot monthly inflation data for Germany using {restatis} for easy API access to the Genesis database
-Example Code (R, ggplot) for [facets of timeseries](https://github.com/wahlatlas/api/blob/main/inflation2026sonderpositionen.R) using the {[restatis](https://github.com/CorrelAid/restatis)} package  
+Example Code (R, ggplot) for [facets of timeseries](https://github.com/wahlatlas/api/blob/main/inflation2026sonderpositionen.R) using the {[restatis](https://github.com/CorrelAid/restatis)} package.  
 Genesis [Table 61111-0006](https://www-genesis.destatis.de/datenbank/online/table/61111-0006) lets you browse through Consumer price index:  
 Germany, months, individual consumption by purpose (COICOP 2-/3-/4-/5-/10-digit codes/ special items)
 
