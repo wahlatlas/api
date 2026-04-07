@@ -18,7 +18,7 @@ cube <- gen_cube(name="61111BM006", database="genesis",
 cube <- cube |>
   rename(Indexwert = PREIS1_WERT)
 
-meta <- gen_val2var(code="CC13B1", database="genesis")
+meta <- gen_val2var(code="CC13B1", database="genesis", language="de")
 
 umsteiger <- setNames(meta$`Values of CC13B1`$Content, 
                       meta$`Values of CC13B1`$Code)
@@ -47,14 +47,6 @@ df <- df |>
   ) |>
   select(-month, -MONAT, -JAHR)
 
-# Veränderung zum Vormonat bestimmen
-df <- df |>
-  arrange(CC13B1, date) |>
-  group_by(CC13B1, month(date)) |>   # group by month
-  mutate(VeraendVormonatProz = round_half_up(Indexwert/lag(Indexwert,n =1) 
-                                             *100-100, 1)) |>
-  ungroup()
-
 df_gesamt <- df |> 
   filter(CC13B1 == "Gesamt") |> 
   select(-CC13B1, -Name)
@@ -66,14 +58,8 @@ month <- format(lastObservation, "%B")
 year <- format(lastObservation, "%Y")
 
 auswahl = c("CC13-071A","CC13-071B","CC13-63I","CC13-63K","CC13-65B","CC13-68",
-            "CC13-65","CC13-77","CC13-808","CC13-803B","CC13-803C","CC13-073C",
-            "CC13-073L","CC13-807","CC13-124I","CC13-73")
-
-# Panel Reihenfolge
-#df <- df |> 
-#  filter(CC13B1 != "Gesamt") |> 
-#  mutate(Name = fct_reorder(Name, xxx, .desc = TRUE))
-
+            "CC13-65","CC13-77","CC13-808","CC13-803B","CC13-803C","CC13-073B",
+            "CC13-073L","CC13-802A","CC13-807","CC13-73")
 
 # PLOT
 p <- df |> 
@@ -90,7 +76,7 @@ p <- df |>
        title = paste("Monatlicher Verbraucherpreisindex bis",month,year),
        subtitle = "Ausgewählte <span style='color:#e71111'>Sonderpositionen</span> vs 
        <span style='color:#888;'>Gesamtindex</span>, 2020 = 100 (Genesis-Tabelle 61111-0006)") +
-  facet_wrap(vars(Name)) 
+  facet_wrap(~Name, labeller = label_wrap_gen(width = 40)) 
 
 
 m <- p+
