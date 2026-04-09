@@ -4,10 +4,12 @@ library(janitor)
 library(grid)
 library(ggtext)
 
+
+# set to FALSE in case latest data doesn't show up
+options(restatis.use_cache = TRUE)
+
+
 #find <- gen_find(category="cubes", database="genesis", term="61111")
-#
-#results <- as_tibble(find) |> 
-#  filter(grepl("Gewicht", Cubes$Content))
 #
 #results <- as_tibble(find) |>  
 #  filter(grepl("Sonder", Cubes$Content))
@@ -71,9 +73,10 @@ p <- df |>
   geom_line(data=df_gesamt, aes(x=date, y=Indexwert), 
             color="#C9C4A8", linewidth = .9, lineend = "round") +
   geom_line(aes(group = Name), color="#e71111", linewidth = .4, lineend = "round") +
-  scale_y_continuous(breaks=seq(from=100, to=200, by=50)) +
+  scale_y_continuous(breaks=seq(from=50, to=300, by=25), 
+                     labels = function(x) {ifelse(x==100, expression(bold("100")),x)}) +
   labs(x=NULL, y=NULL, 
-       title = paste("Monatlicher Verbraucherpreisindex bis",month,year),
+       title = paste("Verbraucherpreisindex Deutschland bis",month,year),
        subtitle = "Ausgewählte <span style='color:#e71111'>Sonderpositionen</span> vs 
        <span style='color:#888;'>Gesamtindex</span>, 2020 = 100 (Genesis-Tabelle 61111-0006)") +
   facet_wrap(~Name, labeller = label_wrap_gen(width = 40)) 
