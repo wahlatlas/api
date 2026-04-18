@@ -3,8 +3,10 @@
 ## Plot monthly inflation data for Germany using {restatis} for easy API access to the Genesis database
 Example Code (R, ggplot) for [facets of timeseries](https://github.com/wahlatlas/api/blob/main/inflation2026sonderpositionen.R) using the {[restatis](https://github.com/CorrelAid/restatis)} package.  
 Genesis [Table 61111-0006](https://www-genesis.destatis.de/datenbank/online/table/61111-0006) lets you browse through Consumer price index:  
-Germany, months, individual consumption by purpose (COICOP 2-/3-/4-/5-/10-digit codes/ special items)
+Germany, months, individual consumption by purpose (COICOP 2-/3-/4-/5-/10-digit codes/ special items)  
 
+You can get [.ics files for all release dates](https://github.com/wahlatlas/api/blob/main/vpi_ical.ipynb) of inflation data, poperly formatted fo 8am Berlin time zone with some Python.
+  
 ## Plot monthly timeseries for electricity trade between Germany and its neighbors
 Research official statistics using the API of their public database.
 Then decide on a table, e.g. `43312-0002` and plot it using matplotlib for each neighbor  
