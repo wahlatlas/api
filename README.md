@@ -5,7 +5,7 @@ Example Code (R, ggplot) for [facets of timeseries](https://github.com/wahlatlas
 Genesis [Table 61111-0006](https://www-genesis.destatis.de/datenbank/online/table/61111-0006) lets you browse through Consumer price index:  
 Germany, months, individual consumption by purpose (COICOP 2-/3-/4-/5-/10-digit codes/ special items)  
 
-You can get [.ics files for all release dates](https://github.com/wahlatlas/api/blob/main/vpi_ical.ipynb) of inflation data, poperly formatted fo 8am Berlin time zone with some Python.
+You can get [.ics files for all release dates](https://github.com/wahlatlas/api/blob/main/vpi_ical.ipynb) of inflation data, poperly formatted to 8am Berlin time zone with some Python.
   
 ## Plot monthly timeseries for electricity trade between Germany and its neighbors
 Research official statistics using the API of their public database.
